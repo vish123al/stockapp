@@ -4,10 +4,13 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
+#from .forms import RegisterForm
 import json
+from django import forms
 from django.template import RequestContext
-
-#import djngo.core.context_processors import csrf
+from django.views.decorators.csrf import csrf_exempt
+#import djngo.core.context_processors 
+#import csrf_exempt
 from stockapp.models import info
 from stockapp.models import history
 from stockapp.models import prediction
@@ -475,16 +478,16 @@ def search1(request,name, day):
 
 def register(request):
 	if request.method == 'POST':
-		form = MyRegistrationForm(request.POST)
+		form = RegistrationForm(request.POST)
 		if form.is_valid():
 			form.save()
 			return HttpResponseRedirect('../register_success.html')
 		else:
 			return HttpResponseRedirect('../invalid_register.html')
 	args = {}
-	args.update(csrf(request))
+	args.update(request)
 	
-	args['form'] = MyRegistrationForm()
+	args['form'] = RegistrationForm()
 	return render_to_response('register.html', args)
 	
 def register_success(request):

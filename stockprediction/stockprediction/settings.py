@@ -58,8 +58,8 @@ ROOT_URLCONF = 'stockprediction.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
-        'APP_DIRS': True,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        ,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -82,9 +82,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'stocks',
         'USER': 'root',
-        'PASSWORD': '1111',
+        'PASSWORD': 'Vishal@12345',
         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-        # 'PORT': '',
+        'PORT': 3306,
     }
 }
 
@@ -131,11 +131,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "/static/"),
 )
 
-
-TEMPLATE_DIRS = (
-     [os.path.join(BASE_DIR, "templates"),]
- )
-
+TEMPLATES[0]['OPTIONS']['debug'] = True
 LOGIN_URL = 'stockprediction_login'
 LOGOUT_URL = 'stockprediction_logout'
 LOGIN_REDIRECT_URL='User_home'

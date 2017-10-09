@@ -57,7 +57,7 @@ urlpatterns = [
     url( r'^query5', 'stockapp.views.query5', name='query5' ),
     url(r'^compare1/ajax/', 'stockapp.views.compare_ajax', name='compare_ajax'),
     url( r'^compare', 'stockapp.views.compare', name='compare' ),
-
+    url( r'^register', 'stockapp.views.register', name='register'),
 
 ]
 
