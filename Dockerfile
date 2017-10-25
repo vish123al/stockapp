@@ -32,8 +32,8 @@ ADD my.cnf /etc/mysql/my.cnf
 #RUN pip install django
 #RUN pip install numpy
 #pip install yahoo_finance
-#RUN python manage.py makemigrations
-#RUN python manage.py migrate
+RUN python manage.py makemigrations
+RUN python manage.py migrate
 #RUN python manage.py test
 
 # expose port 8000 for us to use
