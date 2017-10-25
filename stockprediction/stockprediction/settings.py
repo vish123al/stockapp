@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'User',
     'track',
+    'register',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -83,8 +84,8 @@ DATABASES = {
         'NAME': 'stocks',
         'USER': 'root',
         'PASSWORD': 'Vishal@12345',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
-        'PORT': 3306,
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '',
     }
 }
 
@@ -131,7 +132,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "/static/"),
 )
 
-TEMPLATES[0]['OPTIONS']['debug'] = True
+#TEMPLATES[0]['OPTIONS']['debug'] = True
 LOGIN_URL = 'stockprediction_login'
 LOGOUT_URL = 'stockprediction_logout'
 LOGIN_REDIRECT_URL='User_home'

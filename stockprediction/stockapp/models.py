@@ -49,7 +49,7 @@ class current(models.Model):
 
 
 class prediction(models.Model):
-  symbol=models.CharField(max_length=6)
+  symbol=models.CharField(max_length=20)
   ann_prediction=models.DecimalField(max_digits=20, decimal_places=10)
   bayesian_prediction=models.DecimalField(max_digits=20, decimal_places=10)
   svm_prediction=models.DecimalField(max_digits=20, decimal_places=10)

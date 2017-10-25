@@ -241,9 +241,15 @@
                     <li>
                         <a class="page-scroll" href="/compare/">Compare</a>
                     </li>
+                    {% block content %} 
                     <li>
-                        <a class="page-scroll" href="/register/">Register</a>
+                    <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                        <a class="page-scroll" href="{% url 'register' %}">Register</a>
+                    </form>
                     </li>
+                    {% endblock %}
                     
                     {% if user.is_authenticated %}
 

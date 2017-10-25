@@ -4,6 +4,6 @@
 
 <h2> Congratulations! You have registered with us successfully! </h2>
 
-<p> Click <a href="{% url 'stockprediction_login' %}"> here </a> to login again </p>
+<p> Click <a href="/stockapp/login.html"> here </a> to login again </p>
 
 {% endblock %}

@@ -4,12 +4,13 @@ from django.http import Http404
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
-#from .forms import RegisterForm
+#from .forms import RegistrationForm
 import json
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 from django.template import RequestContext
-from django.views.decorators.csrf import csrf_exempt
-#import djngo.core.context_processors 
+#from django.views.decoratorfrom 
+from django.core.context_processors import csrf
 #import csrf_exempt
 from stockapp.models import info
 from stockapp.models import history
@@ -190,17 +191,17 @@ def search(request,name):
     p=prediction.objects.filter(symbol=name)
     yahoo = Share(name)
     c=yahoo.get_price()
-    # print p[0]
-    # a= p[0].ann_prediction
-    # b= p[0].bayesian_prediction
-    # shortterm=((p[0].ann_prediction+p[0].bayesian_prediction)/2)
-    # print "mean", shortterm
-    # print "current price", c
-    # s= p[0].svm_prediction
-    # a- ann
-# b-bay
-# c-current
-# s-svm
+#    print p[0]
+#    a= p[0].ann_prediction
+#    b= p[0].bayesian_prediction
+ #   shortterm=((p[0].ann_prediction+p[0].bayesian_prediction)/2)
+#   # print "mean", shortterm
+   # print "current price", c
+   # s= p[0].svm_prediction
+   # a-ann
+   # b-bay
+   # c-current
+   # s-svm
 
 
     current=yahoo.get_price()
@@ -329,17 +330,17 @@ def search1(request,name, day):
     p=prediction.objects.filter(symbol=name)
     yahoo = Share(name)
     c=yahoo.get_price()
-    # print p[0]
-    # a= p[0].ann_prediction
-    # b= p[0].bayesian_prediction
-    # shortterm=((p[0].ann_prediction+p[0].bayesian_prediction)/2)
+    print p[0]
+    a= p[0].ann_prediction
+    b= p[0].bayesian_prediction
+    shortterm=((p[0].ann_prediction+p[0].bayesian_prediction)/2)
     # print "mean", shortterm
     # print "current price", c
     # s= p[0].svm_prediction
-    # a- ann
-# b-bay
-# c-current
-# s-svm
+    # a-ann
+   # b-bay
+   # c-current
+   # s-svm
 
 
     current=yahoo.get_price()
@@ -464,8 +465,8 @@ def search1(request,name, day):
 
     # ANN= analyzeSymbol(name)
     # Bayt= bayesian(name)
-    # # Bay= bayesian1(name)
-    # s=svm(name,5)
+   # Bay= bayesian1(name)
+   #  s=svm(name,5)
     return render(request, 'search2.html',{'name':name.upper(),'days':day,'books': books,'p':p,'message':message})
 
 # def macd(request,name,macd):
@@ -478,16 +479,16 @@ def search1(request,name, day):
 
 def register(request):
 	if request.method == 'POST':
-		form = RegistrationForm(request.POST)
+		form = UserCreationForm(request.POST)
 		if form.is_valid():
 			form.save()
-			return HttpResponseRedirect('../register_success.html')
+			return HttpResponseRedirect('/register_success.html/')
 		else:
-			return HttpResponseRedirect('../invalid_register.html')
+			return HttpResponseRedirect('/invalid_register.html/')
 	args = {}
-	args.update(request)
+	args.update(csrf(request))
 	
-	args['form'] = RegistrationForm()
+	args['form'] = UserCreationForm()
 	return render_to_response('register.html', args)
 	
 def register_success(request):
@@ -512,7 +513,7 @@ def invalid_register(request):
 
 
 def getcurrent(name):
-    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     sql = '''SELECT time,close FROM stockapp_current WHERE symbol LIKE "%''' + name + '''%"'''
     cursor.execute(sql)
@@ -530,7 +531,7 @@ def getcurrent(name):
 
 def gethistorical(name):
     try:
-        db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='1111',db='stocks')
+        db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
         cursor=db.cursor()
         sql = '''SELECT date,Open,close FROM stockapp_history WHERE symbol LIKE "%''' + name + '''%"'''
         cursor.execute(sql)
@@ -1045,7 +1046,7 @@ class NeuralNetwork:
 
 
 def query1(request):
-    db=MySQLdb.connect(host='localhost',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     cursor.execute("SELECT symbol, prev_close  FROM `stockapp_info`")
     result=cursor.fetchall()
@@ -1054,7 +1055,7 @@ def query1(request):
     return render_to_response("query1.html/",{'result1' : result},context_instance=RequestContext(request))
 
 def query2(request):
-    db=MySQLdb.connect(host='localhost',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     cursor.execute("SELECT MAX(close) FROM `stockapp_history` WHERE symbol='GOOG' and date>=(CURDATE()-INTERVAL 10 day)")
     result=cursor.fetchall()
@@ -1065,7 +1066,7 @@ def query2(request):
     #return render_to_response("query2.html/",context_instance=RequestContext(request))
 
 def query3(request):
-    db=MySQLdb.connect(host='localhost',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     cursor.execute("SELECT AVG(close) FROM `stockapp_history` WHERE symbol='MSFT' and date>=(CURDATE()-INTERVAL 365 day)")
     
@@ -1078,7 +1079,7 @@ def query3(request):
     
 
 def query4(request):
-    db=MySQLdb.connect(host='localhost',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     stock_list=[] 
     filename = 'stock_list.txt'
@@ -1105,7 +1106,7 @@ def query4(request):
 
 
 def query5(request):
-    db=MySQLdb.connect(host='localhost',user='root',passwd='1111',db='stocks')
+    db=MySQLdb.connect(host='127.0.0.1',user='root',passwd='Vishal@12345',db='stocks')
     cursor=db.cursor()
     cur=db.cursor()
     cur1=db.cursor()
@@ -1185,17 +1186,17 @@ def compare_ajax(request):
         print "hey there"
         stocks.append(stock1)
         stocks.append(stock2)
-        #if len(stock1) is not 0:
+       # if len(stock1) is not 0:
 
         try:
             
             i = info.objects.filter(symbol=stock1)
-            # print i[0]
+            print i[0]
             j = info.objects.filter(symbol=stock2)
-            # print j[0]
-            # COMP.objects.all().delete()
-            # s=COMP(symbol=stock1)
-            #print s
+            print j[0]
+            COMP.objects.all().delete()
+           #  s=COMP(symbol=stock1)
+          #  print s
             # s.save()
             # t=COMP(symbol=stock2)
             # t.save()
