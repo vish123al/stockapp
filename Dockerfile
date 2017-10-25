@@ -18,7 +18,7 @@ WORKDIR /stockprediction
 # build app
 #!/usr/bin/python
 RUN apt-get install -y python-dev 
-#RUN apt-get install -y libmysqlclient-dev
+RUN apt-get install -y libmysqlclient-dev
 RUN apt-get install -y libblas-dev liblapack-dev libatlas-base-dev gfortran
 RUN apt-get install -y python-sklearn  
 #RUN pip install -r requirements.txt
