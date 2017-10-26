@@ -18,6 +18,7 @@ node {
     stage '(PUBLISH) Pushing the image '
     sh "docker push vishaldenge/stocknew:${gitCommit()}"
      stage '(DEPLOY) Deploying the container'
+    //sh 'curl -X POST -H "Content-Type: application/json" http://10.0.1.85:8080/v2/groups -d@marathon2.json'
     marathon(
         url: 'http://10.0.1.85:8080',
         forceUpdate: true,
